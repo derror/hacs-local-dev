@@ -1,0 +1,18 @@
+services:
+  homeassistant:
+    container_name: homeassistant-hacs-dev
+    build: ./build/homeassistant
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./config:/config
+    environment:
+      - TZ=Etc/UTC
+    restart: unless-stopped
+    privileged: true
+    ports:
+      - 8123:8123
+
+volumes:
+  config:
+    driver: local
